@@ -2,7 +2,7 @@
 
 ## Project Function
 
-The project is under development. The source code is in the temp branch. Some features are available now
+The project is under development. The source code is in the "rest-api-related-to-story" branch. Some features are available now
 1. User can create story.
 2. User can update any story.
 3. User can delete any story.
