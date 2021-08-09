@@ -2,20 +2,24 @@
 
 ## Function
 
-1. User can register.
+User can:
+1. Create account.
+2. Log in.
 
 ## URI
 
-To create new user: POST http://localhost:8080/user/register,
+To create new user: POST http://localhost:5000/user/register,
 
-   Request Body: {"email":"", "password":""}
+   Request Body: {"fullname":"Your name", "email":"example@email.com", "password":"your password"}
+   
+To Log in: POST http://localhost:5000/user/login,
+
+   Request Body: {"email":"Registered email", "password":"correct password"}
 
 ## Technology Used
 
 Spring boot, Spring Security
 
-
 ## TODO
 
-1. User login
-3. Jwt authentication
+1. Jwt Verification

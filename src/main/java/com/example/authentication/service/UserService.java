@@ -1,20 +1,19 @@
 package com.example.authentication.service;
 
+import com.example.authentication.model.LoginUserDetails;
 import com.example.authentication.model.User;
 import com.example.authentication.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.ExecutionException;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
     @Autowired
     PasswordEncoder passwordEncoder;
 
@@ -26,10 +25,19 @@ public class UserService {
         return "Registration Successful";
     }
 
-    public User getUserByEmail(String email) {
+
+    public User getUserByEmail(String email) throws UsernameNotFoundException{
         Optional<User> user = userRepository.findByEmail(email);
-//        Optional<User> user = userRepository.findOne(Example.of(new User(email, passwordEncoder.encode(password))));
-        return user.orElse(null);
+        return user.orElseThrow(()-> new UsernameNotFoundException("Incorrect email or password"));
     }
 
+    public boolean isEmailAvailable(String email){
+        return userRepository.findByEmail(email).orElse(null) != null;
+    }
+
+    @Override
+    public LoginUserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Optional<User> user = userRepository.findByEmail(email);
+        return user.map(LoginUserDetails::new).orElseThrow(()-> new UsernameNotFoundException("Incorrect email or password"));
+    }
 }
