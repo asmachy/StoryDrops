@@ -38,6 +38,6 @@ public class UserService implements UserDetailsService {
     @Override
     public LoginUserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Optional<User> user = userRepository.findByEmail(email);
-        return user.map(LoginUserDetails::new).orElseThrow(()-> new UsernameNotFoundException("Incorrect email or password"));
+        return new LoginUserDetails(user.orElseThrow(()-> new UsernameNotFoundException("Incorrect email or password")));
     }
 }

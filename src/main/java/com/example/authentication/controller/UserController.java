@@ -58,6 +58,7 @@ public class UserController {
             SecurityContextHolder.getContext().setAuthentication(authentication);
             LoginUserDetails userDetails = userService.loadUserByUsername(loginRequest.getEmail());
             String token = jwtUtil.generateToken(userDetails);
+
             return new ResponseEntity<>(new LoginResponse("Login Successful!",
                     userDetails.getFullname(), userDetails.getEmail(),token), HttpStatus.OK);
         } catch (Exception e){

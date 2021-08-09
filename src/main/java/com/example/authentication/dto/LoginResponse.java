@@ -1,5 +1,8 @@
 package com.example.authentication.dto;
 
+import com.example.authentication.model.LoginUserDetails;
+import org.apache.juli.logging.Log;
+
 public class LoginResponse {
     private String message, fullname, email, token;
 
@@ -11,6 +14,7 @@ public class LoginResponse {
         this.fullname = fullname;
         this.email = email;
         this.token = token;
+
     }
 
     public String getMessage() {
@@ -44,5 +48,7 @@ public class LoginResponse {
     public void setToken(String token) {
         this.token = token;
     }
+
+
 }
 
