@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,9 +20,9 @@ public class PostService {
         return postRepository.findAll();
     }
 
-    public Post getPostById(int id){
+    public Post getPostById(int id) throws EntityNotFoundException{
         Optional<Post> postOptional = postRepository.findById(id);
-        return postOptional.orElse(null);
+        return postOptional.orElseThrow(()-> new EntityNotFoundException("Invalid Post Id"));
     }
 
     public String createNewPost(Post post, String author, String author_email){
@@ -29,18 +30,17 @@ public class PostService {
         return "Post Created";
     }
 
-    public Post updatePostById(int id, JSONObject post){
-        Post currentPost = postRepository.findById(id).orElse(null);
-        if(currentPost== null) return null;
-        if(post.get("title")!=null) currentPost.setTitle(post.get("title").toString());
-        if(post.get("body")!=null) currentPost.setBody(post.get("body").toString());
+    public Post updatePostById(int id, Post post) throws EntityNotFoundException {
+        Post currentPost = postRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("Invalid post id"));
+        currentPost.setTitle(post.getTitle());
+        currentPost.setBody(post.getBody());
         postRepository.save(currentPost);
-        return currentPost;
+        return post;
 
     }
 
-    public String deletePostById(int id){
-        Post post = postRepository.findById(id).orElse(null);
+    public String deletePostById(int id)  throws EntityNotFoundException{
+        Post post = postRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("Invalid post id"));
         if(post== null) return null;
         postRepository.deleteById(id);
         return "Post Deleted";
