@@ -3,9 +3,7 @@ package org.cefalo.storyDrops.controller;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import org.cefalo.storyDrops.model.Post;
-import org.cefalo.storyDrops.model.User;
 import org.cefalo.storyDrops.repository.PostRepository;
-import org.cefalo.storyDrops.repository.UserRepository;
 import org.cefalo.storyDrops.service.PostService;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +46,7 @@ public class PostController {
         Post responseFromService = postService.updatePostById(id, post);
         if(responseFromService == null) return new ResponseEntity<>("Invalid Post Id",HttpStatus.NOT_FOUND);
         JSONObject responseData=new JSONObject();
-        responseData.put("message","Post Created");
+        responseData.put("message","Post Updated");
         responseData.put("post", responseFromService);
         return new ResponseEntity<>(responseData, HttpStatus.OK);
     }

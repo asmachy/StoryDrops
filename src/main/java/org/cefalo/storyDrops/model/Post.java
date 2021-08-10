@@ -2,8 +2,6 @@ package org.cefalo.storyDrops.model;
 
 import javax.validation.constraints.NotNull;
 
-//import com.sun.istack.NotNull;
-
 import javax.persistence.*;
 
 @Entity
