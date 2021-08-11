@@ -111,4 +111,4 @@ The project will run on localhost port 5000. You can change the port number by c
     Authorization: Bearer {valid_token}`
 
 ## Technology Used
-Spring boot (version 2.5.3), Spring security, Jwt Authentication, JDK 11, gradle 7.1.1
+Spring boot (version 2.5.3), Spring security, Jwt Authentication, JDK 11, gradle 7.1.1, MySQL
