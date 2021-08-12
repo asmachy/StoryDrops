@@ -34,9 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
-//                .cors().and()
                 .csrf().disable()
-//                .antMatcher("/user/**")
                 .authorizeRequests()
                 .antMatchers("/user/register/**")
                 .permitAll()
@@ -59,11 +57,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity.addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);
 
         httpSecurity.cors().configurationSource(request -> {
-            var cors = new CorsConfiguration();
-            cors.setAllowedOrigins(List.of("http://localhost:3000"));
-            cors.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-            cors.setAllowedHeaders(List.of("*"));
-            return cors;
+            CorsConfiguration corsConfig = new CorsConfiguration();
+            corsConfig.setAllowedOrigins(List.of("http://localhost:3000"));
+            corsConfig.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE"));
+            corsConfig.setAllowedHeaders(List.of("*"));
+            return corsConfig;
         });
 
     }

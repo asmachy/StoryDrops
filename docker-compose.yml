@@ -1,0 +1,30 @@
+version: '3'
+services:
+    mysql_db:
+        image: "mysql:latest"
+        environment:
+            - MYSQL_ROOT_PASSWORD=password
+            - MYSQL_USER=story
+            - MYSQL_PASSWORD=password
+            - MYSQL_DATABASE=storydrops
+        ports:
+            - "3306:3306"
+        # container_name: simple-blogging-website
+    #        volumes:
+    #            - ./db/:/data/simple-blogging-website-backend
+
+    story-api-server:
+        image: story-api-server
+        environment:
+            - SPRING_DATASOURCE_URL=jdbc:mysql://mysql_db:3306/storydrops?useSSL=false&allowPublicKeyRetrieval=true
+            - SPRING_DATASOURCE_USERNAME=story
+            - SPRING_DATASOURCE_PASSWORD=password
+        build:
+            context: ./
+            dockerfile: Dockerfile
+        ports:
+            - "5000:5000"
+        # container_name: simple-blogging-website
+        depends_on:
+            - mysql_db
+
