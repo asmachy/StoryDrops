@@ -18,23 +18,57 @@ User can:
 2. Install MySql in your local machine and make sure that it is running on port 3306.
 3. Create a schema (db) in your mySql named "storydrops", or you can use your own schema. For doing that you have to change the datasource.url in /src/main/resource/application.properties
 4. Install jdk 11
-5. Install intellij in your local machine.
-6. Start intellij and open this project.
-7. Build this project from intellij.
-8. Go to /src/main/java/com/example/storyDrops/storyDropsApplication.java
-9. Run the main method.
 
-Or, you can also run this project from CLI (Command line interface). To do that,
+After completing 1-4 steps, you can run this project in your local machine. You could use CLI/intellij/docker to run this project.
 
-A. Follow the 1-4 steps
 
-B. Make sure you are using gradle 7.1.* on your local machine. 
+To run using CLI:
 
-C. Run command on terminal(linux)/ cmd prompt(windows)/ powershell(windows): `cd StoryDrops`
+A.1. Follow the 1-4 steps
 
-D. Run appropriate command to build and run this gradle project.
+B.1. Make sure you are using gradle 7.1.* on your local machine.
 
-The project will run on localhost port 5000. You can change the port number by changing server.port in /src/main/resource/application.properties
+C.1. Run command on terminal(linux)/ cmd prompt(windows)/ powershell(windows): `cd StoryDrops`
+
+D.1. Run appropriate command to build and run this gradle project.
+
+
+To run using intellij:  
+
+A.2. Follow the 1-4 steps
+
+B.2. Install intellij in your local machine.
+
+C.2. Start intellij and open this project.
+
+D.2. Build this project from intellij.
+
+E.2. Go to /src/main/java/com/example/storyDrops/storyDropsApplication.java
+
+F.2. Run the main method.
+
+The backend project will run on port 5000. You can change the port number by changing server.port in /src/main/resource/application.properties.
+
+
+To run using docker:
+
+Beside the backend api image and mysql image, the docker-compose file in this project also contains a client-side image. So, by using docker you can run this project along with the frontend (client-side). To do that, follow next steps...
+
+A.3. Clone this repository
+
+B.3. Clone the frontend repository from "https://github.com/asmachy/simple-blogging-website-frontend"
+
+C.3 The frontend and backend repository must be in the same folder
+
+D.3. Install appropriate version (according to your operating system) of docker on your local machine.
+
+E.3. Make sure that port 5000, 3000 and 3307 on your local machine is free. 
+
+F.3. Run command on terminal(linux)/ cmd prompt(windows)/ powershell(windows): `cd StoryDrops`
+
+G.3: Run command: `docker compose up`
+
+The backend project will run on port 5000 and frontend will run on port 3000.
 
 ## Features
 ### To register (POST http://localhost:5000/user/register):
