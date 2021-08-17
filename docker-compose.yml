@@ -1,10 +1,10 @@
 version: '3'
 services:
-    client:
-        image: client
+    storydrops_client:
+        image: storydrops_client
         # stdin_open: true
         build:
-            context: ./simple-blogging-website-frontend/
+            context: ../simple-blogging-website-frontend/
             dockerfile: Dockerfile
         ports:
             - "3000:3000"
